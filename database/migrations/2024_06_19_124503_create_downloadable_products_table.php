@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('downloadable_products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('short_description');
-            $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->string('file_url');
+            $table->integer('download_limit');
+            $table->dateTime('expiration_time')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('downloadable_products');
     }
 };
