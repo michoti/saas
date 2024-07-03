@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('short_description');
             $table->foreignId('category_id')->constrained('product_categories')->onDelete('cascade');
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
     }
